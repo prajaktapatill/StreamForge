@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DenyAccidentalDeletionOrUpdates",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": [
+                "s3:DeleteBucket",
+                "s3:PutBucketPolicy",
+                "s3:DeleteBucketPolicy"
+            ],
+            "Resource": [
+                "arn:aws:s3:::netstream-terraform-state-2026",
+                "arn:aws:s3:::netstream-terraform-state-2026/*"
+            ]
+        }
+    ]
+}
