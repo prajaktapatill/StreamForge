@@ -18,7 +18,7 @@
                 "Sid": "AssumeRoleForTerraform",
                 "Effect": "Allow",
                 "Action": "sts:AssumeRole",
-                "Resource": "arn:aws:iam::${var.account_id}:role/${var.project_name}-TerraformExecutionRole"
+                "Resource": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/${PROJECT_NAME}-TerraformExecutionRole"
             },
             {
                 "Sid": "AgentCloudWatchLogs",
@@ -28,7 +28,7 @@
                     "logs:CreateLogStream",
                     "logs:PutLogEvents"
                 ],
-                "Resource": "arn:aws:logs:${var.aws_region}:${var.account_id}:log-group:/aws/jenkins-agents/${var.project_name}/*"
+                "Resource": "arn:aws:logs:${AWS_REGION}:${AWS_ACCOUNT_ID}:log-group:/aws/jenkins-agents/${PROJECT_NAME}/*"
             },
             {
                 "Sid": "SSMSessionManagerAccess",
@@ -46,8 +46,8 @@
                     "s3:ListBucket"
                 ],
                 "Resource": [
-                    "arn:aws:s3:::${var.project_name}-tfstate",
-                    "arn:aws:s3:::${var.project_name}-tfstate/*"
+                    "arn:aws:s3:::${PROJECT_NAME}-tfstate",
+                    "arn:aws:s3:::${PROJECT_NAME}-tfstate/*"
                 ]
             },
             {

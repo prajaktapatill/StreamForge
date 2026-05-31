@@ -4,15 +4,18 @@ locals {
     AWS_ACCOUNT_ID = var.account_id
     AWS_REGION     = var.aws_region
     PROJECT_NAME   = var.project_name
+    SSO_USER_ARN   = var.sso_user_arn
   }))
   jenkins_agent_config = jsondecode(templatefile("${path.module}/policies/jenkins_agent_policy.json", {
     AWS_ACCOUNT_ID = var.account_id
     AWS_REGION     = var.aws_region
     PROJECT_NAME   = var.project_name
+    SSO_USER_ARN   = var.sso_user_arn
   }))
   tf_exec_role_config = jsondecode(templatefile("${path.module}/policies/tf_exec_role_policy.json", {
     AWS_ACCOUNT_ID = var.account_id
     AWS_REGION     = var.aws_region
     PROJECT_NAME   = var.project_name
+    SSO_USER_ARN   = var.sso_user_arn
   }))
 }

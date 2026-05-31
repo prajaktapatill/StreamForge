@@ -1,7 +1,3 @@
-# This only needs to be written ONCE in the entire folder
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # JenkinsMasterRole
 resource "aws_iam_role" "jenkins_master_role" {
   name               = "${var.project_name}-JenkinsMasterRole"
@@ -23,18 +19,12 @@ resource "aws_iam_instance_profile" "jenkins_master_instance_profile" {
 resource "aws_iam_role" "jenkins_agent_role" {
   name               = "${var.project_name}-JenkinsAgentRole"
   assume_role_policy = jsonencode(local.jenkins_agent_config.trust_policy)
-
 }
+#1. Allow Jenkins Agent to assume the Jenkins Master Role
 resource "aws_iam_role_policy" "jenkins_agent_policy" {
   name   = "${var.project_name}-JenkinsAgentPolicy"
   role   = aws_iam_role.jenkins_agent_role.id
   policy = jsonencode(local.jenkins_agent_config.operational_policy)
-}
-#1. Allow Jenkins Agent to assume the Jenkins Master Role
-resource "aws_iam_role_policy" "jenkins_agent_assume_master_policy" {
-  name   = "${var.project_name}-JenkinsAgentAssumeMasterPolicy"
-  role   = aws_iam_role.jenkins_agent_role.id
-  policy = jsonencode(local.jenkins_agent_config.assume_master_policy)
 }
 
 #2. Create the EC2 Instance Profile Container

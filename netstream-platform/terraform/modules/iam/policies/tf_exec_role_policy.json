@@ -14,7 +14,7 @@
                 "Sid": "TrustSSOUser",
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "${var.sso_user_arn}"
+                    "AWS": "${SSO_USER_ARN}"
                 },
                 "Action": "sts:AssumeRole"
             }
