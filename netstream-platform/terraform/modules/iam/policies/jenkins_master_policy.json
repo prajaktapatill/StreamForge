@@ -1,0 +1,52 @@
+{
+    "trust_policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "://amazonaws.com"
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    },
+    "operational_policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "CloudWatchLogsAccess",
+                "Effect": "Allow",
+                "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                ],
+                "Resource": "arn:aws:logs:${AWS_REGION}:${AWS_ACCOUNT_ID}:log-group:/aws/jenkins/${PROJECT_NAME}/*"
+            },
+            {
+                "Sid": "ScopedSecretsManagerAccess",
+                "Effect": "Allow",
+                "Action": "secretsmanager:GetSecretValue",
+                "Resource": "arn:aws:secretsmanager:${AWS_REGION}:${AWS_ACCOUNT_ID}:secret:${PROJECT_NAME}/*"
+            },
+            {
+                "Sid": "SSMSessionManagerAccess",
+                "Effect": "Allow",
+                "Action": "ssm:*",
+                "Resource": "*"
+            },
+            {
+                "Sid": "EC2AgentManagement",
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:RunInstances",
+                    "ec2:TerminateInstances",
+                    "ec2:DescribeInstances",
+                    "ec2:CreateTags"
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
+}
