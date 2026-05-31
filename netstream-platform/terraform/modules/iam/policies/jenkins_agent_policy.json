@@ -15,6 +15,12 @@
         "Version": "2012-10-17",
         "Statement": [
             {
+                "Sid": "AssumeRoleForTerraform",
+                "Effect": "Allow",
+                "Action": "sts:AssumeRole",
+                "Resource": "arn:aws:iam::${var.account_id}:role/${var.project_name}-TerraformExecutionRole"
+            },
+            {
                 "Sid": "AgentCloudWatchLogs",
                 "Effect": "Allow",
                 "Action": [
@@ -22,7 +28,7 @@
                     "logs:CreateLogStream",
                     "logs:PutLogEvents"
                 ],
-                "Resource": "arn:aws:logs:${AWS_REGION}:${AWS_ACCOUNT_ID}:log-group:/aws/jenkins-agents/${PROJECT_NAME}/*"
+                "Resource": "arn:aws:logs:${var.aws_region}:${var.account_id}:log-group:/aws/jenkins-agents/${var.project_name}/*"
             },
             {
                 "Sid": "SSMSessionManagerAccess",
@@ -40,19 +46,9 @@
                     "s3:ListBucket"
                 ],
                 "Resource": [
-                    "arn:aws:s3:::${PROJECT_NAME}-tfstate",
-                    "arn:aws:s3:::${PROJECT_NAME}-tfstate/*"
+                    "arn:aws:s3:::${var.project_name}-tfstate",
+                    "arn:aws:s3:::${var.project_name}-tfstate/*"
                 ]
-            },
-            {
-                "Sid": "TerraformStateDynamoDBLocking",
-                "Effect": "Allow",
-                "Action": [
-                    "dynamodb:GetItem",
-                    "dynamodb:PutItem",
-                    "dynamodb:DeleteItem"
-                ],
-                "Resource": "arn:aws:dynamodb:${AWS_REGION}:${AWS_ACCOUNT_ID}:table/${PROJECT_NAME}-tflocks"
             },
             {
                 "Sid": "ECRAndEKSPipelineAccess",

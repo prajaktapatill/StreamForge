@@ -9,6 +9,14 @@
                     "AWS": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/${PROJECT_NAME}-JenkinsAgentRole"
                 },
                 "Action": "sts:AssumeRole"
+            },
+            {
+                "Sid": "TrustSSOUser",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "${var.sso_user_arn}"
+                },
+                "Action": "sts:AssumeRole"
             }
         ]
     },
