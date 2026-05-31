@@ -21,8 +21,5 @@ variable "account_id" {
 variable "sso_user_arn" {
   description = "The ARN of the SSO user that will be allowed to assume the TerraformExecutionRole."
   type        = string
-}
-variable "permission_boundary_arn" {
-  description = "The ARN of the permission boundary to apply to the IAM roles."
-  type        = string
+  default     = "arn:aws:iam::<account_id>:user/<sso_user_name>"
 }

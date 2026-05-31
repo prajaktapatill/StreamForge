@@ -3,6 +3,6 @@ module "iam" {
   project_name = var.project_name
   environment  = var.environment
   aws_region   = var.aws_region
-  account_id   = data.aws_caller_identity.current.account_id
-  sso_user_arn = data.aws_caller_identity.current.arn
+  account_id   = var.account_id
+  sso_user_arn = var.sso_user_arn
 }
