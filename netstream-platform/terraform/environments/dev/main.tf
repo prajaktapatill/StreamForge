@@ -26,7 +26,6 @@ module "vpc" {
 
 
 # Setup EC2 instances for Jenkins Master and Agents
-/*
 module "ec2" {
   source = "../../modules/ec2"
   
@@ -59,4 +58,3 @@ module "ec2" {
   agent_max_count     = var.agent_max_size
   agent_min_count     = var.agent_min_size
 }
-*/
