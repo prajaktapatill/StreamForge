@@ -63,3 +63,29 @@ variable "jenkins_agent_iam_instance_profile_name" {
   description = "The name of the IAM instance profile to attach to the Jenkins Agent EC2 instances."
   type        = string
 }
+variable "agent_desired_count" {
+  type        = number
+  description = "The target running count of build agents."
+}
+
+variable "agent_min_count" {
+  type        = number
+  description = "The absolute minimum pool ceiling allowance for active workers."
+}
+
+variable "agent_max_count" {
+  type        = number
+  description = "The maximum elastic threshold cap allowed for scaled instances."
+}
+variable "jenkins_master_desired_capacity" {
+  type        = number
+  description = "The desired capacity for the Jenkins Master Auto Scaling Group."
+}
+variable "jenkins_master_min_size" {
+  type        = number
+  description = "The minimum size for the Jenkins Master Auto Scaling Group."
+}
+variable "jenkins_master_max_size" {
+  type        = number
+  description = "The maximum size for the Jenkins Master Auto Scaling Group."
+}
