@@ -5,11 +5,11 @@ output "public_subnet_ids" {
   value = aws_subnet.public.*.id
 }
 output "private_subnet_ids" {
-  value = aws_subnet.private.*.id   
+  value = aws_subnet.private.*.id
 }
 output "database_subnet_ids" {
   value = aws_subnet.database.*.id
-}   
+}
 
 output "nat_gateway_id" {
   value = aws_nat_gateway.main.id
@@ -17,11 +17,4 @@ output "nat_gateway_id" {
 
 output "vpc_cidr" {
   value = aws_vpc.this.cidr_block
-}
-
-output "jenkins_master_sg_id" {
-  value = aws_security_group.jenkins_master_sg.id
-}
-output "jenkins_agent_sg_id" {
-  value = aws_security_group.jenkins_agent_sg.id
 }
