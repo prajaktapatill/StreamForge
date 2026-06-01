@@ -16,7 +16,7 @@ module "ec2_iam_instance_profiles" {
 module "vpc" {
   source             = "../../modules/vpc"
   availability_zones = var.availability_zones
-  allowed_admin_cidr = var.allowed_admin_cidr 
+  allowed_admin_cidr = var.allowed_admin_cidr
   cidr_block         = var.cidr_block
   project_name       = var.project_name
   environment        = var.environment
@@ -26,10 +26,9 @@ module "vpc" {
 
 
 # Setup EC2 instances for Jenkins Master and Agents
-/*
 module "ec2" {
-  source = "../../modules/ec2"
-  
+  source = "../../modules/ec2/jenkins"
+
   # Core Context Global Variables
   project_name  = var.project_name
   environment   = var.environment
@@ -59,4 +58,3 @@ module "ec2" {
   agent_max_count     = var.agent_max_size
   agent_min_count     = var.agent_min_size
 }
-*/
