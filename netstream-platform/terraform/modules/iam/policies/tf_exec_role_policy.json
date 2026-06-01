@@ -1,0 +1,43 @@
+{
+    "trust_policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "TrustJenkinsAgentToAssume",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/${PROJECT_NAME}-JenkinsAgentRole"
+                },
+                "Action": "sts:AssumeRole"
+            },
+            {
+                "Sid": "TrustSSOUser",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "${SSO_USER_ARN}"
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    },
+    "operational_policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "FullInfrastructureManagement",
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:*",
+                    "eks:*",
+                    "ecr:*",
+                    "s3:*",
+                    "dynamodb:*",
+                    "kms:*",
+                    "secretsmanager:*",
+                    "logs:*"
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
+}
